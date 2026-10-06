@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Victor Martins Almeida | Portfólio Profissional</title>
+    <!-- Fonte Inter Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome para Ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --bg-dark: #0f172a;
+            --bg-card: #1e293b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent: #38bdf8;
+            --border: #334155;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        /* Header / Navbar */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(15, 23, 42, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 2rem;
+        }
+
+        .logo {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--text-main);
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        /* Seção Hero com Foto */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 8rem 2rem 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            gap: 3rem;
+        }
+
+        .hero-content {
+            max-width: 650px;
+        }
+
+        .hero-image-container {
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .profile-img {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--accent);
+            box-shadow: 0 0 25px rgba(56, 189, 248, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .profile-img:hover {
+            transform: scale(1.03);
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.4rem 1rem;
+            background: rgba(37, 99, 235, 0.1);
+            color: var(--accent);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero h2 {
+            font-size: 1.4rem;
+            color: var(--text-muted);
+            font-weight: 400;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.8rem 1.8rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--text-main);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        /* Seções Gerais */
+        section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 3rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 50%;
+            height: 4px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+
+        /* Habilidades */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .skill-card {
+            background: var(--bg-card);
+            padding: 1.8rem;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            transition: transform 0.3s;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .skill-card i {
+            font-size: 2rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .skill-card h3 {
+            margin-bottom: 0.8rem;
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .tag {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            border: 1px solid var(--border);
+        }
+
+        /* Experiência & Formação */
+        .timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .timeline-card {
+            background: var(--bg-card);
+            padding: 2rem;
+            border-radius: 12px;
+            border-left: 4px solid var(--accent);
+            border-top: 1px solid var(--border);
+            border-right: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .timeline-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 0.8rem;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .timeline-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .timeline-company {
+            color: var(--accent);
+            font-weight: 500;
+        }
+
+        .timeline-date {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            background: rgba(255, 255, 255, 0.05);
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+        }
+
+        .timeline-body ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .timeline-body li {
+            position: relative;
+            padding-left: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-muted);
+        }
+
+        .timeline-body li::before {
+            content: '•';
+            color: var(--accent);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        /* Certificações */
+        .cert-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .cert-card {
+            background: var(--bg-card);
+            padding: 1.8rem;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            display: flex;
+            gap: 1.2rem;
+            align-items: flex-start;
+            transition: transform 0.3s ease;
+        }
+
+        .cert-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+        }
+
+        .cert-icon {
+            font-size: 2.2rem;
+            color: var(--accent);
+            flex-shrink: 0;
+        }
+
+        .cert-details h3 {
+            font-size: 1.15rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .cert-issuer {
+            color: var(--accent);
+            font-weight: 500;
+            font-size: 0.95rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .cert-meta {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* Formulário de Contato */
+        .contact-container {
+            background: var(--bg-card);
+            padding: 3rem;
+            border-radius: 16px;
+            border: 1px solid var(--border);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-top: 2rem;
+        }
+
+        .contact-info p {
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-links {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            background: var(--bg-dark);
+            padding: 0.8rem 1.2rem;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .contact-item:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-group label {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            background: var(--bg-dark);
+            border: 1px solid var(--border);
+            padding: 0.8rem 1rem;
+            border-radius: 8px;
+            color: var(--text-main);
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: var(--accent);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            border-top: 1px solid var(--border);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Responsividade */
+        @media (max-width: 900px) {
+            .hero {
+                flex-direction: column-reverse;
+                text-align: center;
+                padding-top: 6rem;
+            }
+            .hero-content { max-width: 100%; }
+            .hero-buttons { justify-content: center; }
+            .profile-img { width: 220px; height: 220px; }
+            .contact-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.2rem; }
+            .nav-links { display: none; }
+            section { padding: 3rem 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header / Navbar -->
+    <header>
+        <nav>
+            <a href="#" class="logo">Victor<span>.dev</span></a>
+            <ul class="nav-links">
+                <li><a href="#sobre">Sobre</a></li>
+                <li><a href="#habilidades">Habilidades</a></li>
+                <li><a href="#certificacoes">Certificações</a></li>
+                <li><a href="#experiencia">Experiência</a></li>
+                <li><a href="#formacao">Formação</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Seção Principal (Hero) com Foto -->
+    <section class="hero" id="sobre">
+        <div class="hero-content">
+            <span class="badge"><i class="fa-solid fa-code"></i> Desenvolvedor & Gestor de TI</span>
+            <h1>Victor Martins Almeida</h1>
+            <h2>Bacharelado em Sistemas de Informação | IFNMG</h2>
+            <p>
+                Desenvolvedor de software focado em Front-End (JavaScript, HTML, CSS, APIs REST) e linguagens como Python e SQL. Experiência consolidada em liderança organizacional, gestão estratégica e financeira de projetos em Tecnologia da Informação.
+            </p>
+            <div class="hero-buttons">
+                <a href="#contato" class="btn btn-primary"><i class="fa-regular fa-envelope"></i> Entrar em Contato</a>
+                <a href="https://github.com/vma5" target="_blank" class="btn btn-secondary"><i class="fa-brands fa-github"></i> GitHub</a>
+                <a href="https://www.linkedin.com/in/victor-martins-almeida-88a656212/" target="_blank" class="btn btn-secondary"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
+            </div>
+        </div>
+
+        <div class="hero-image-container">
+            <img src="imagen/foto 2.jpeg" alt="Foto de Victor Martins Almeida" class="profile-img">
+        </div>
+    </section>
+
+    <!-- Habilidades -->
+    <section id="habilidades">
+        <h2 class="section-title">Competências Profissionais</h2>
+        <div class="skills-grid">
+            <div class="skill-card">
+                <i class="fa-solid fa-laptop-code"></i>
+                <h3>Desenvolvimento Web & Front-End</h3>
+                <p>Criação de interfaces modernas, dinâmicas e responsivas com consumo de serviços Web.</p>
+                <div class="tags">
+                    <span class="tag">HTML5</span>
+                    <span class="tag">CSS3</span>
+                    <span class="tag">JavaScript</span>
+                    <span class="tag">APIs REST</span>
+                </div>
+            </div>
+
+            <div class="skill-card">
+                <i class="fa-solid fa-terminal"></i>
+                <h3>Linguagens de Programação</h3>
+                <p>Domínio em linguagens chave para desenvolvimento de algoritmos e engenharia de software.</p>
+                <div class="tags">
+                    <span class="tag">Python</span>
+                    <span class="tag">JavaScript</span>
+                    <span class="tag">C#</span>
+                    <span class="tag">C++</span>
+                    <span class="tag">Java</span>
+                </div>
+            </div>
+
+            <div class="skill-card">
+                <i class="fa-solid fa-database"></i>
+                <h3>Bancos de Dados & Ferramentas</h3>
+                <p>Estruturação, manipulação de dados relacionais e ferramentas administrativas.</p>
+                <div class="tags">
+                    <span class="tag">SQL</span>
+                    <span class="tag">Bancos Relacionais</span>
+                    <span class="tag">Pacote Office</span>
+                </div>
+            </div>
+
+            <div class="skill-card">
+                <i class="fa-solid fa-users-gear"></i>
+                <h3>Gestão & Soft Skills</h3>
+                <p>Liderança de equipes multidisciplinares, gestão orçamentária e metodologias ágeis (Scrum).</p>
+                <div class="tags">
+                    <span class="tag">Gestão de Projetos</span>
+                    <span class="tag">Liderança</span>
+                    <span class="tag">Scrum / Ágil</span>
+                    <span class="tag">Negociação</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certificações -->
+    <section id="certificacoes">
+        <h2 class="section-title">Certificações e Licenças</h2>
+        <div class="cert-grid">
+            <div class="cert-card">
+                <div class="cert-icon">
+                    <i class="fa-solid fa-certificate"></i>
+                </div>
+                <div class="cert-details">
+                    <h3>Scrum Fundamentals Certified (SFC™)</h3>
+                    <div class="cert-issuer">SCRUMstudy / VMEdu, Inc.</div>
+                    <div class="cert-meta">
+                        <div><strong>Emitido em:</strong> 11 de Agosto de 2025</div>
+                        <div><strong>ID do Certificado:</strong> 1096985</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experiência -->
+    <section id="experiencia">
+        <h2 class="section-title">Experiência Profissional</h2>
+        <div class="timeline">
+
+            <div class="timeline-card">
+                <div class="timeline-header">
+                    <div>
+                        <div class="timeline-title">Líder Governamental / Coordenador de Negócios</div>
+                        <div class="timeline-company">Núcleo Norte, Minas Gerais (Organização sem fins lucrativos)</div>
+                    </div>
+                    <span class="timeline-date">07/2025 - 01/2026</span>
+                </div>
+                <div class="timeline-body">
+                    <ul>
+                        <li>Coordenação de ações estratégicas de prospecção e negociação com parceiros e instituições regionais.</li>
+                        <li>Gestão e organização de projetos focados no desenvolvimento regional do Movimento Empresa Júnior.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="timeline-card">
+                <div class="timeline-header">
+                    <div>
+                        <div class="timeline-title">Presidente & Assessor Financeiro</div>
+                        <div class="timeline-company">SIFSoft Junior, Salinas</div>
+                    </div>
+                    <span class="timeline-date">08/2024 - 12/2025</span>
+                </div>
+                <div class="timeline-body">
+                    <ul>
+                        <li>Gestão geral da empresa júnior do segmento de tecnologia, liderando equipes multidisciplinares e traçando metas estratégicas.</li>
+                        <li>Administração orçamentária, planejamento financeiro e controle dos processos internos.</li>
+                        <li>Atuação técnica direta em projetos de desenvolvimento web e relacionamento com clientes.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="timeline-card">
+                <div class="timeline-header">
+                    <div>
+                        <div class="timeline-title">Representante de Vendas</div>
+                        <div class="timeline-company">Unopar (Univerce), Salinas</div>
+                    </div>
+                    <span class="timeline-date">11/2020 - 03/2021</span>
+                </div>
+                <div class="timeline-body">
+                    <ul>
+                        <li>Prospecção e conversão de vendas para cursos de graduação e pós-graduação (presencial e EAD).</li>
+                        <li>Atendimento direto e suporte informativo sobre os processos seletivos.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="timeline-card">
+                <div class="timeline-header">
+                    <div>
+                        <div class="timeline-title">Repositor de Estoque e Entregador</div>
+                        <div class="timeline-company">Só Festa Supermercados, Salinas</div>
+                    </div>
+                    <span class="timeline-date">04/2019 - 12/2019</span>
+                </div>
+                <div class="timeline-body">
+                    <ul>
+                        <li>Controle rigoroso de estoque, organização de mercadorias e atendimento direto ao consumidor.</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Formação -->
+    <section id="formacao">
+        <h2 class="section-title">Formação Acadêmica</h2>
+        <div class="timeline">
+
+            <div class="timeline-card">
+                <div class="timeline-header">
+                    <div>
+                        <div class="timeline-title">Bacharelado em Sistemas de Informação</div>
+                        <div class="timeline-company">Instituto Federal do Norte de Minas Gerais (IFNMG) - Salinas</div>
+                    </div>
+                    <span class="timeline-date">04/2022 - Em andamento</span>
+                </div>
+            </div>
+
+            <div class="timeline-card">
+                <div class="timeline-header">
+                    <div>
+                        <div class="timeline-title">Ensino Médio Completo</div>
+                        <div class="timeline-company">Escola Estadual Coronel Idalino Ribeiro, Salinas</div>
+                    </div>
+                    <span class="timeline-date">03/2006 - 12/2018</span>
+                </div>
+            </div>
+
+            <div class="timeline-card">
+                <div class="timeline-header">
+                    <div>
+                        <div class="timeline-title">Curso de Informática Básica (Pacote Office)</div>
+                        <div class="timeline-company">Salinas</div>
+                    </div>
+                    <span class="timeline-date">01/2018</span>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Contato e Formulário -->
+    <section id="contato">
+        <div class="contact-container">
+            <h2 class="section-title">Entre em Contato</h2>
+            <div class="contact-grid">
+                
+                <div class="contact-info">
+                    <p>Fique à vontade para me enviar uma mensagem direta pelo formulário ou através de um dos meus canais oficiais.</p>
+                    <div class="contact-links">
+                        <a href="mailto:victormarins321.va1@gmail.com" class="contact-item">
+                            <i class="fa-regular fa-envelope" style="color: var(--accent);"></i>
+                            victormarins321.va1@gmail.com
+                        </a>
+                        <a href="tel:38988446780" class="contact-item">
+                            <i class="fa-solid fa-phone" style="color: var(--accent);"></i>
+                            (38) 9 8844-6780
+                        </a>
+                        <a href="https://github.com/vma5" target="_blank" class="contact-item">
+                            <i class="fa-brands fa-github" style="color: var(--accent);"></i>
+                            github.com/vma5
+                        </a>
+                        <a href="https://www.linkedin.com/in/victor-martins-almeida-88a656212/" target="_blank" class="contact-item">
+                            <i class="fa-brands fa-linkedin" style="color: var(--accent);"></i>
+                            LinkedIn
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Formulário Conectado ao Formspree -->
+                <form action="https://formspree.io/f/xkjogwey" method="POST" class="contact-form">
+                    <div class="form-group">
+                        <label for="name">Seu Nome</label>
+                        <input type="text" id="name" name="name" required placeholder="Digite seu nome">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Seu E-mail</label>
+                        <input type="email" id="email" name="email" required placeholder="seuemail@exemplo.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Sua Mensagem</label>
+                        <textarea id="message" name="message" rows="5" required placeholder="Escreva sua mensagem..."></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary"><i class="fa-solid fa-paper-plane"></i> Enviar Mensagem</button>
+                </form>
+
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; Victor Martins Almeida. Todos os direitos reservados.</p>
+    </footer>
+
+</body>
+</html>
