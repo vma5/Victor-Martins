@@ -470,10 +470,106 @@
             .contact-grid { grid-template-columns: 1fr; }
         }
 
+        /* Botão flutuante do WhatsApp */
+        .whatsapp-float {
+            position: fixed;
+            right: 24px;
+            bottom: 24px;
+            z-index: 1100;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            height: 60px;
+            min-width: 60px;
+            padding: 0 1.1rem;
+            justify-content: center;
+            background: #25d366;
+            color: #fff;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            animation: whatsapp-pulse 2.4s infinite;
+        }
+
+        .whatsapp-float i {
+            font-size: 1.9rem;
+            line-height: 1;
+        }
+
+        .whatsapp-float:hover,
+        .whatsapp-float:focus-visible {
+            background: #1ebe5b;
+            transform: translateY(-3px) scale(1.04);
+            outline: none;
+        }
+
+        @keyframes whatsapp-pulse {
+            0%   { box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35), 0 0 0 0 rgba(37, 211, 102, 0.55); }
+            70%  { box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35), 0 0 0 16px rgba(37, 211, 102, 0); }
+            100% { box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35), 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .whatsapp-float { animation: none; }
+        }
+
+        @media (max-width: 768px) {
+            .whatsapp-float {
+                right: 16px;
+                bottom: 16px;
+                width: 56px;
+                height: 56px;
+                padding: 0;
+            }
+            .whatsapp-float span { display: none; }
+        }
+
+        /* Botão do menu mobile (escondido no desktop) */
+        .menu-toggle {
+            display: none;
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            width: 44px;
+            height: 44px;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
+        .menu-toggle:hover,
+        .menu-toggle:focus-visible {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
         @media (max-width: 768px) {
             .hero h1 { font-size: 2.2rem; }
-            .nav-links { display: none; }
             section { padding: 3rem 1.5rem; }
+
+            .menu-toggle { display: inline-flex; align-items: center; justify-content: center; }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                flex-direction: column;
+                gap: 0;
+                background: rgba(15, 23, 42, 0.98);
+                border-bottom: 1px solid var(--border);
+            }
+
+            .nav-links.open { display: flex; }
+
+            .nav-links a {
+                display: block;
+                padding: 1rem 2rem;
+            }
         }
     </style>
 </head>
@@ -483,7 +579,10 @@
     <header>
         <nav>
             <a href="#" class="logo">Victor<span>.dev</span></a>
-            <ul class="nav-links">
+            <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="nav-links">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+            <ul class="nav-links" id="nav-links">
                 <li><a href="#sobre">Sobre</a></li>
                 <li><a href="#habilidades">Habilidades</a></li>
                 <li><a href="#certificacoes">Certificações</a></li>
@@ -511,7 +610,7 @@
         </div>
 
         <div class="hero-image-container">
-            <img src="imagen/foto 2.jpeg" alt="Foto de Victor Martins Almeida" class="profile-img">
+            <img src="images/foto-perfil.jpeg" alt="Foto de Victor Martins Almeida" class="profile-img">
         </div>
     </section>
 
@@ -708,9 +807,9 @@
                 <div class="contact-info">
                     <p>Fique à vontade para me enviar uma mensagem direta pelo formulário ou através de um dos meus canais oficiais.</p>
                     <div class="contact-links">
-                        <a href="mailto:victormarins321.va1@gmail.com" class="contact-item">
+                        <a href="mailto:victormartins321.va1@gmail.com" class="contact-item">
                             <i class="fa-regular fa-envelope" style="color: var(--accent);"></i>
-                            victormarins321.va1@gmail.com
+                            victormartins321.va1@gmail.com
                         </a>
                         <a href="tel:38988446780" class="contact-item">
                             <i class="fa-solid fa-phone" style="color: var(--accent);"></i>
@@ -751,6 +850,40 @@
     <footer>
         <p>&copy; Victor Martins Almeida. Todos os direitos reservados.</p>
     </footer>
+
+    <!-- Botão flutuante do WhatsApp -->
+    <a href="https://wa.me/5538988446780?text=Ol%C3%A1%20Victor%2C%20vi%20seu%20portf%C3%B3lio%20e%20gostaria%20de%20conversar."
+       class="whatsapp-float"
+       target="_blank"
+       rel="noopener noreferrer"
+       aria-label="Conversar no WhatsApp">
+        <i class="fa-brands fa-whatsapp"></i>
+        <span>Fale comigo</span>
+    </a>
+
+    <script>
+        (function () {
+            var toggle = document.getElementById('menu-toggle');
+            var links = document.getElementById('nav-links');
+            if (!toggle || !links) return;
+
+            function setOpen(open) {
+                links.classList.toggle('open', open);
+                toggle.setAttribute('aria-expanded', String(open));
+                toggle.setAttribute('aria-label', open ? 'Fechar menu' : 'Abrir menu');
+                toggle.querySelector('i').className = open ? 'fa-solid fa-xmark' : 'fa-solid fa-bars';
+            }
+
+            toggle.addEventListener('click', function () {
+                setOpen(!links.classList.contains('open'));
+            });
+
+            // Fecha o menu ao escolher uma seção
+            links.querySelectorAll('a').forEach(function (a) {
+                a.addEventListener('click', function () { setOpen(false); });
+            });
+        })();
+    </script>
 
 </body>
 </html>
