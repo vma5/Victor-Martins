@@ -4,6 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Victor Martins Almeida | Portfólio Profissional</title>
+    <!-- Marca a página como "com JS" para as animações de entrada; se o script principal falhar, o conteúdo volta a aparecer -->
+    <script>
+        document.documentElement.classList.add('js');
+        setTimeout(function () {
+            if (!window.__ok) document.documentElement.classList.remove('js');
+        }, 3000);
+    </script>
     <!-- Fonte Inter Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -260,6 +267,70 @@
             border: 1px solid var(--border);
         }
 
+        /* Projetos */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .project-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+        }
+
+        .project-cover {
+            height: 140px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: #fff;
+        }
+
+        .cover-food  { background: linear-gradient(135deg, #f97316, #db2777); }
+        .cover-game  { background: linear-gradient(135deg, #16a34a, #0ea5e9); }
+        .cover-term  { background: linear-gradient(135deg, #334155, #7c3aed); }
+
+        .project-body {
+            padding: 1.6rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            flex: 1;
+        }
+
+        .project-body h3 {
+            font-size: 1.2rem;
+        }
+
+        .project-body p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .project-body .tags {
+            margin-top: auto;
+            padding-top: 0.4rem;
+        }
+
+        .project-link {
+            align-self: flex-start;
+            margin-top: 0.4rem;
+            padding: 0.6rem 1.2rem;
+            font-size: 0.9rem;
+        }
+
         /* Experiência & Formação */
         .timeline {
             display: flex;
@@ -470,6 +541,66 @@
             .contact-grid { grid-template-columns: 1fr; }
         }
 
+        /* Ações do menu (idioma + hambúrguer) */
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .lang-switch {
+            display: inline-flex;
+            height: 44px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .lang-switch button {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            min-width: 46px;
+            padding: 0 0.8rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .lang-switch button + button {
+            border-left: 1px solid var(--border);
+        }
+
+        .lang-switch button:hover,
+        .lang-switch button:focus-visible {
+            color: var(--accent);
+        }
+
+        .lang-switch button.active {
+            background: var(--accent);
+            color: var(--bg-dark);
+        }
+
+        /* Animações de entrada (discretas) */
+        .js .reveal:not(.visible) {
+            opacity: 0;
+        }
+
+        .reveal.visible {
+            animation: fade-up 0.6s ease-out backwards;
+        }
+
+        @keyframes fade-up {
+            from { opacity: 0; transform: translateY(18px); }
+            to   { opacity: 1; transform: none; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .js .reveal:not(.visible) { opacity: 1; }
+            .reveal.visible { animation: none; }
+        }
+
         /* Botão flutuante do WhatsApp */
         .whatsapp-float {
             position: fixed;
@@ -579,17 +710,24 @@
     <header>
         <nav>
             <a href="#" class="logo">Victor<span>.dev</span></a>
-            <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="nav-links">
-                <i class="fa-solid fa-bars"></i>
-            </button>
             <ul class="nav-links" id="nav-links">
                 <li><a href="#sobre">Sobre</a></li>
                 <li><a href="#habilidades">Habilidades</a></li>
+                <li><a href="#projetos">Projetos</a></li>
                 <li><a href="#certificacoes">Certificações</a></li>
                 <li><a href="#experiencia">Experiência</a></li>
                 <li><a href="#formacao">Formação</a></li>
                 <li><a href="#contato">Contato</a></li>
             </ul>
+            <div class="nav-actions">
+                <div class="lang-switch" role="group" aria-label="Idioma / Language" data-i18n-skip>
+                    <button type="button" data-lang="pt" lang="pt" title="Português" aria-label="Português" aria-pressed="true" class="active">PT</button>
+                    <button type="button" data-lang="en" lang="en" title="English" aria-label="English" aria-pressed="false">EN</button>
+                </div>
+                <button class="menu-toggle" id="menu-toggle" type="button" data-i18n-skip aria-label="Abrir menu" aria-expanded="false" aria-controls="nav-links">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
         </nav>
     </header>
 
@@ -610,7 +748,7 @@
         </div>
 
         <div class="hero-image-container">
-            <img src="imagen/foto 2.jpeg" alt="Foto de Victor Martins Almeida" class="profile-img">
+            <img src="images/foto-perfil.jpeg" alt="Foto de Victor Martins Almeida" class="profile-img">
         </div>
     </section>
 
@@ -665,6 +803,71 @@
                     <span class="tag">Negociação</span>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <!-- Projetos -->
+    <section id="projetos">
+        <h2 class="section-title">Projetos</h2>
+        <div class="projects-grid">
+
+            <article class="project-card">
+                <div class="project-cover cover-food" aria-hidden="true">
+                    <i class="fa-solid fa-utensils"></i>
+                </div>
+                <div class="project-body">
+                    <h3>Sabores do Mundo</h3>
+                    <p>Portal de receitas doces e salgadas com páginas dedicadas por categoria, tela de login e layout responsivo. As receitas abrem em janelas modais feitas só com CSS (checkbox e seletor :checked), com vídeo do YouTube, ingredientes e modo de preparo.</p>
+                    <div class="tags">
+                        <span class="tag">HTML5</span>
+                        <span class="tag">CSS3</span>
+                        <span class="tag">Modal sem JavaScript</span>
+                        <span class="tag">Responsivo</span>
+                    </div>
+                    <a href="https://github.com/vma5/04-web2026-HTML-CSS" target="_blank" rel="noopener noreferrer" class="btn btn-secondary project-link">
+                        <i class="fa-brands fa-github"></i> Ver código
+                    </a>
+                </div>
+            </article>
+
+            <article class="project-card">
+                <div class="project-cover cover-game" aria-hidden="true">
+                    <i class="fa-solid fa-shapes"></i>
+                </div>
+                <div class="project-body">
+                    <h3>Encontre a Diferença</h3>
+                    <p>Jogo para crianças de 6 anos: em um tabuleiro 3×3, o jogador toca na figura diferente em partidas de 30 segundos. Sem punições, com bônus de atenção, efeitos sonoros gerados por código e ranking salvo no navegador.</p>
+                    <div class="tags">
+                        <span class="tag">JavaScript</span>
+                        <span class="tag">Web Audio API</span>
+                        <span class="tag">localStorage</span>
+                        <span class="tag">UX infantil</span>
+                    </div>
+                    <a href="https://github.com/vma5/Encontre-a-Diferenca" target="_blank" rel="noopener noreferrer" class="btn btn-secondary project-link">
+                        <i class="fa-brands fa-github"></i> Ver código
+                    </a>
+                </div>
+            </article>
+
+            <article class="project-card">
+                <div class="project-cover cover-term" aria-hidden="true">
+                    <i class="fa-solid fa-terminal"></i>
+                </div>
+                <div class="project-body">
+                    <h3>Jogo da Forca</h3>
+                    <p>Jogo de terminal em Node.js com 20 palavras em 3 categorias, sistema de dicas com penalidade, pontuação dinâmica e ranking Top 5 salvo em arquivo JSON.</p>
+                    <div class="tags">
+                        <span class="tag">Node.js</span>
+                        <span class="tag">JavaScript</span>
+                        <span class="tag">JSON</span>
+                        <span class="tag">Terminal</span>
+                    </div>
+                    <a href="https://github.com/vma5/Jogo-da-Forca-" target="_blank" rel="noopener noreferrer" class="btn btn-secondary project-link">
+                        <i class="fa-brands fa-github"></i> Ver código
+                    </a>
+                </div>
+            </article>
+
         </div>
     </section>
 
@@ -861,21 +1064,243 @@
         <span>Fale comigo</span>
     </a>
 
+    <!-- Traduções PT -> EN: edite aqui para ajustar o texto em inglês -->
+    <script type="application/json" id="i18n-en">
+    {
+      "Sobre": "About",
+      "Habilidades": "Skills",
+      "Projetos": "Projects",
+      "Certificações": "Certifications",
+      "Experiência": "Experience",
+      "Formação": "Education",
+      "Contato": "Contact",
+      "Abrir menu": "Open menu",
+      "Fechar menu": "Close menu",
+      "Victor Martins Almeida | Portfólio Profissional": "Victor Martins Almeida | Professional Portfolio",
+      "Desenvolvedor & Gestor de TI": "Developer & IT Manager",
+      "Bacharelado em Sistemas de Informação | IFNMG": "Bachelor's Degree in Information Systems | IFNMG",
+      "Desenvolvedor de software focado em Front-End (JavaScript, HTML, CSS, APIs REST) e linguagens como Python e SQL. Experiência consolidada em liderança organizacional, gestão estratégica e financeira de projetos em Tecnologia da Informação.": "Software developer focused on Front-End (JavaScript, HTML, CSS, REST APIs) and languages such as Python and SQL. Solid experience in organizational leadership and in the strategic and financial management of Information Technology projects.",
+      "Entrar em Contato": "Get in Touch",
+      "Foto de Victor Martins Almeida": "Photo of Victor Martins Almeida",
+      "Competências Profissionais": "Professional Skills",
+      "Desenvolvimento Web & Front-End": "Web & Front-End Development",
+      "Criação de interfaces modernas, dinâmicas e responsivas com consumo de serviços Web.": "Building modern, dynamic and responsive interfaces that consume web services.",
+      "Linguagens de Programação": "Programming Languages",
+      "Domínio em linguagens chave para desenvolvimento de algoritmos e engenharia de software.": "Proficiency in key languages for algorithm development and software engineering.",
+      "Bancos de Dados & Ferramentas": "Databases & Tools",
+      "Estruturação, manipulação de dados relacionais e ferramentas administrativas.": "Structuring and manipulating relational data, plus administrative tools.",
+      "Bancos Relacionais": "Relational Databases",
+      "Pacote Office": "Office Suite",
+      "Gestão & Soft Skills": "Management & Soft Skills",
+      "Liderança de equipes multidisciplinares, gestão orçamentária e metodologias ágeis (Scrum).": "Leading multidisciplinary teams, budget management and agile methodologies (Scrum).",
+      "Gestão de Projetos": "Project Management",
+      "Liderança": "Leadership",
+      "Scrum / Ágil": "Scrum / Agile",
+      "Negociação": "Negotiation",
+    "APIs REST": "REST APIs",
+      "Sabores do Mundo": "Sabores do Mundo (World Flavors)",
+      "Portal de receitas doces e salgadas com páginas dedicadas por categoria, tela de login e layout responsivo. As receitas abrem em janelas modais feitas só com CSS (checkbox e seletor :checked), com vídeo do YouTube, ingredientes e modo de preparo.": "Recipe portal for sweet and savory dishes, with a page per category, a login screen and a responsive layout. Recipes open in modal windows built with CSS only (checkbox and the :checked selector), with a YouTube video, ingredients and instructions.",
+      "Modal sem JavaScript": "No-JavaScript modals",
+      "Responsivo": "Responsive",
+      "Encontre a Diferença": "Find the Difference",
+      "Jogo para crianças de 6 anos: em um tabuleiro 3×3, o jogador toca na figura diferente em partidas de 30 segundos. Sem punições, com bônus de atenção, efeitos sonoros gerados por código e ranking salvo no navegador.": "A game for 6-year-old children: on a 3×3 board, the player taps the odd figure out in 30-second rounds. No penalties, an attention bonus, sound effects generated in code and a ranking saved in the browser.",
+      "UX infantil": "Child-friendly UX",
+      "Jogo da Forca": "Hangman Game",
+      "Jogo de terminal em Node.js com 20 palavras em 3 categorias, sistema de dicas com penalidade, pontuação dinâmica e ranking Top 5 salvo em arquivo JSON.": "A Node.js terminal game with 20 words in 3 categories, a hint system with a penalty, dynamic scoring and a Top 5 ranking saved to a JSON file.",
+      "Ver código": "View code",
+      "Certificações e Licenças": "Certifications & Licenses",
+      "Emitido em:": "Issued:",
+      "11 de Agosto de 2025": "August 11, 2025",
+      "ID do Certificado:": "Certificate ID:",
+      "Experiência Profissional": "Professional Experience",
+      "Líder Governamental / Coordenador de Negócios": "Government Leader / Business Coordinator",
+      "Núcleo Norte, Minas Gerais (Organização sem fins lucrativos)": "Núcleo Norte, Minas Gerais (Non-profit organization)",
+      "Coordenação de ações estratégicas de prospecção e negociação com parceiros e instituições regionais.": "Coordinated strategic prospecting and negotiation efforts with regional partners and institutions.",
+      "Gestão e organização de projetos focados no desenvolvimento regional do Movimento Empresa Júnior.": "Managed and organized projects focused on the regional development of the Junior Enterprise Movement.",
+      "Presidente & Assessor Financeiro": "President & Financial Advisor",
+      "Gestão geral da empresa júnior do segmento de tecnologia, liderando equipes multidisciplinares e traçando metas estratégicas.": "General management of a technology junior enterprise, leading multidisciplinary teams and setting strategic goals.",
+      "Administração orçamentária, planejamento financeiro e controle dos processos internos.": "Budget administration, financial planning and control of internal processes.",
+      "Atuação técnica direta em projetos de desenvolvimento web e relacionamento com clientes.": "Hands-on technical work on web development projects and client relationship management.",
+      "Representante de Vendas": "Sales Representative",
+      "Prospecção e conversão de vendas para cursos de graduação e pós-graduação (presencial e EAD).": "Prospecting and closing sales for undergraduate and graduate programs (on-campus and distance learning).",
+      "Atendimento direto e suporte informativo sobre os processos seletivos.": "Direct customer service and information support on admission processes.",
+      "Repositor de Estoque e Entregador": "Stock Clerk & Delivery Driver",
+      "Controle rigoroso de estoque, organização de mercadorias e atendimento direto ao consumidor.": "Strict inventory control, merchandise organization and direct customer service.",
+      "Formação Acadêmica": "Education",
+      "Bacharelado em Sistemas de Informação": "Bachelor's Degree in Information Systems",
+      "Instituto Federal do Norte de Minas Gerais (IFNMG) - Salinas": "Federal Institute of Northern Minas Gerais (IFNMG) - Salinas",
+      "04/2022 - Em andamento": "04/2022 - In progress",
+      "Ensino Médio Completo": "High School Diploma",
+      "Escola Estadual Coronel Idalino Ribeiro, Salinas": "Coronel Idalino Ribeiro State School, Salinas",
+      "Curso de Informática Básica (Pacote Office)": "Basic Computing Course (Office Suite)",
+      "Entre em Contato": "Get in Touch",
+      "Fique à vontade para me enviar uma mensagem direta pelo formulário ou através de um dos meus canais oficiais.": "Feel free to send me a message through the form or through one of my official channels.",
+      "Seu Nome": "Your Name",
+      "Seu E-mail": "Your Email",
+      "Sua Mensagem": "Your Message",
+      "Digite seu nome": "Type your name",
+      "seuemail@exemplo.com": "youremail@example.com",
+      "Escreva sua mensagem...": "Write your message...",
+      "Enviar Mensagem": "Send Message",
+      "© Victor Martins Almeida. Todos os direitos reservados.": "© Victor Martins Almeida. All rights reserved.",
+      "Fale comigo": "Chat with me",
+      "Conversar no WhatsApp": "Chat on WhatsApp",
+      "Olá Victor, vi seu portfólio e gostaria de conversar.": "Hello Victor, I saw your portfolio and would like to talk."
+    }
+    </script>
+
+    <script>
+        (function () {
+            var dataEl = document.getElementById('i18n-en');
+            var EN = {};
+            try { EN = JSON.parse(dataEl.textContent); } catch (e) { EN = {}; }
+
+            var WA_BASE = 'https://wa.me/5538988446780?text=';
+            var WA_MSG = 'Olá Victor, vi seu portfólio e gostaria de conversar.';
+            var ptTitle = document.title;
+            var lang = 'pt';
+
+            function norm(s) { return s.replace(/\s+/g, ' ').trim(); }
+
+            // Traduz uma frase em português (usada também pelo script do menu)
+            window.t = function (s) { return lang === 'en' && EN[s] ? EN[s] : s; };
+
+            // Guarda o texto original (PT) de cada nó de texto e atributo traduzível
+            var textNodes = [];
+            var walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
+                acceptNode: function (n) {
+                    var p = n.parentNode.nodeName;
+                    if (p === 'SCRIPT' || p === 'STYLE' || p === 'NOSCRIPT') return NodeFilter.FILTER_REJECT;
+                    return n.nodeValue.trim() ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
+                }
+            });
+            while (walker.nextNode()) {
+                textNodes.push({ node: walker.currentNode, pt: walker.currentNode.nodeValue });
+            }
+
+            var attrs = [];
+            document.querySelectorAll('[placeholder],[alt],[aria-label]').forEach(function (el) {
+                if (el.hasAttribute('data-i18n-skip')) return;
+                ['placeholder', 'alt', 'aria-label'].forEach(function (a) {
+                    if (el.hasAttribute(a)) attrs.push({ el: el, attr: a, pt: el.getAttribute(a) });
+                });
+            });
+
+            var langBtns = document.querySelectorAll('.lang-switch button');
+            var waLink = document.querySelector('.whatsapp-float');
+
+            function apply(next, persist) {
+                lang = next;
+                var en = lang === 'en';
+
+                textNodes.forEach(function (r) {
+                    var key = norm(r.pt);
+                    if (en && EN[key]) {
+                        var lead = r.pt.match(/^\s*/)[0];
+                        var trail = r.pt.match(/\s*$/)[0];
+                        r.node.nodeValue = lead + EN[key] + trail;
+                    } else {
+                        r.node.nodeValue = r.pt;
+                    }
+                });
+
+                attrs.forEach(function (r) {
+                    var key = norm(r.pt);
+                    r.el.setAttribute(r.attr, en && EN[key] ? EN[key] : r.pt);
+                });
+
+                document.documentElement.lang = en ? 'en' : 'pt-BR';
+                document.title = en && EN[ptTitle] ? EN[ptTitle] : ptTitle;
+
+                if (waLink) waLink.setAttribute('href', WA_BASE + encodeURIComponent(window.t(WA_MSG)));
+
+                langBtns.forEach(function (b) {
+                    var on = b.getAttribute('data-lang') === lang;
+                    b.classList.toggle('active', on);
+                    b.setAttribute('aria-pressed', String(on));
+                });
+
+                if (persist) {
+                    try { localStorage.setItem('lang', lang); } catch (e) {}
+                }
+                document.dispatchEvent(new Event('langchange'));
+            }
+
+            langBtns.forEach(function (b) {
+                b.addEventListener('click', function () {
+                    apply(b.getAttribute('data-lang'), true);
+                });
+            });
+
+            // Idioma inicial: ?lang=en|pt na URL, depois a escolha salva, depois o idioma do navegador
+            var initial = null;
+            try {
+                var q = new URLSearchParams(window.location.search).get('lang');
+                if (q === 'en' || q === 'pt') initial = q;
+            } catch (e) {}
+            if (!initial) {
+                try { initial = localStorage.getItem('lang'); } catch (e) {}
+            }
+            if (initial !== 'en' && initial !== 'pt') {
+                initial = (navigator.language || 'pt').toLowerCase().indexOf('pt') === 0 ? 'pt' : 'en';
+            }
+            apply(initial, false);
+            // Garante que o script do menu (carregado depois) receba o idioma inicial
+            setTimeout(function () { document.dispatchEvent(new Event('langchange')); }, 0);
+
+            // Animações de entrada ao rolar a página (só se o navegador suportar e o usuário permitir movimento)
+            var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            if ('IntersectionObserver' in window && !reduce) {
+                var targets = document.querySelectorAll(
+                    '.hero-content, .hero-image-container, .section-title, .skill-card, ' +
+                    '.project-card, .cert-card, .timeline-card, .contact-container'
+                );
+                var io = new IntersectionObserver(function (entries) {
+                    entries.forEach(function (entry) {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('visible');
+                            io.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+                targets.forEach(function (el) {
+                    el.classList.add('reveal');
+                    // Pequeno escalonamento entre cartões irmãos (máx. 5 passos)
+                    var idx = Array.prototype.indexOf.call(el.parentNode.children, el);
+                    var step = el.classList.contains('hero-image-container') ? 2 : Math.min(idx, 5);
+                    el.style.animationDelay = (step * 80) + 'ms';
+                    io.observe(el);
+                });
+            } else {
+                document.documentElement.classList.remove('js');
+            }
+
+            window.__ok = true;
+        })();
+    </script>
+
     <script>
         (function () {
             var toggle = document.getElementById('menu-toggle');
             var links = document.getElementById('nav-links');
             if (!toggle || !links) return;
+            var t = window.t || function (s) { return s; };
 
             function setOpen(open) {
                 links.classList.toggle('open', open);
                 toggle.setAttribute('aria-expanded', String(open));
-                toggle.setAttribute('aria-label', open ? 'Fechar menu' : 'Abrir menu');
+                toggle.setAttribute('aria-label', t(open ? 'Fechar menu' : 'Abrir menu'));
                 toggle.querySelector('i').className = open ? 'fa-solid fa-xmark' : 'fa-solid fa-bars';
             }
 
             toggle.addEventListener('click', function () {
                 setOpen(!links.classList.contains('open'));
+            });
+
+            // Atualiza o rótulo do botão quando o idioma muda
+            document.addEventListener('langchange', function () {
+                setOpen(links.classList.contains('open'));
             });
 
             // Fecha o menu ao escolher uma seção

@@ -10,7 +10,7 @@ O projeto foi construído com foco em desempenho, responsividade e código limpo
 
 - **HTML5**: Estruturação semântica e acessível.
 - **CSS3**: Estilização moderna, uso de variáveis CSS, layout em Flexbox e CSS Grid.
-- **JavaScript**: Apenas o necessário (menu de navegação no mobile).
+- **JavaScript**: Apenas o necessário: menu de navegação no mobile, troca de idioma PT/EN e animações de entrada ao rolar a página.
 - **Font Awesome**: Ícones vetoriais.
 - **Google Fonts (Inter)**: Tipografia limpa e de alta legibilidade.
 - **Formspree**: Envio do formulário de contato diretamente para o e-mail.
@@ -24,7 +24,10 @@ O projeto foi construído com foco em desempenho, responsividade e código limpo
 - **Certificações**: *Scrum Fundamentals Certified (SFC™)*, emitida pela SCRUMstudy.
 - **Experiência Profissional**: Trajetória cronológica, incluindo atuações na *SIFSoft Junior* e no *Núcleo Norte* do Movimento Empresa Júnior.
 - **Formação Acadêmica**: Bacharelado em Sistemas de Informação no IFNMG.
+- **Projetos**: Três projetos com descrição e link para o código.
+- **Português / Inglês**: Seletor PT | EN no menu. A escolha fica salva no navegador, e também dá para abrir direto em um idioma com `?lang=en` ou `?lang=pt`. As traduções ficam no bloco `<script id="i18n-en">` do `index.html`.
 - **Formulário Funcional**: Envio direto de mensagens para a caixa de entrada do desenvolvedor.
+- **Botão de WhatsApp**: Botão flutuante que abre uma conversa com mensagem pré-preenchida.
 
 ---
 
